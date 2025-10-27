@@ -1,4 +1,3 @@
-5
 -- Jokers
 
 SMODS.Atlas({
@@ -1471,7 +1470,7 @@ SMODS.Blind({
 
 SMODS.Atlas({
     key = "corruption",
-    path = "cristoforo.png",
+    path = "leviathan.png",
     px = 34,
     py = 34,
     atlas_table = 'ANIMATION_ATLAS',
