@@ -1,15 +1,15 @@
-
+5
 -- Jokers
 
 SMODS.Atlas({
-    key = "worker",
+    key = "mm_worker",
     path = "zani.png",
     px = 71,
     py = 95
 })
 
 local joker_2 = SMODS.Joker({
-    key = "worker",
+    key = "mm_worker",
     loc_txt = {
         name = "Sleepless Worker",
         text = {
@@ -20,7 +20,7 @@ local joker_2 = SMODS.Joker({
     rarity = 2,
     blueprint_compat = true,
     cost = 7,
-    atlas = "worker",
+    atlas = "mm_worker",
     pos = {x = 0, y = 0},
 
     config = { extra = { mult = 7, chips = 24 } },
@@ -41,27 +41,27 @@ local joker_2 = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "crystalization",
+    key = "mm_crystalization",
     path = "carlotta.png",
     px = 71,
     py = 95
 })
 
 local crystalization_joker = SMODS.Joker({
-    key = "crystalization",
+    key = "mm_crystalization",
     loc_txt = {
         name = "Sophisticated Crystallization",
         text = {
             "Gains {X:mult,C:white}X#1#{} Mult for every",
             "{C:money}$#2#{} you have",
-            "Currently: {X:mult,C:white}X#3#{}"
+            "{C:inactive}(Currently: {X:mult,C:white}X#3#{}{C:inactive}){}"
         }
     },
 
     rarity = 3,
     blueprint_compat = true,
     cost = 12,
-    atlas = "crystalization",
+    atlas = "mm_crystalization",
     pos = { x = 0, y = 0 },
 
     config = { extra = { Xmult = 0.5, dollars = 15 } },
@@ -93,7 +93,7 @@ local crystalization_joker = SMODS.Joker({
 
 
 SMODS.Atlas({
-    key = "mysterious",
+    key = "mm_mysterious",
     path = "cantarella.png",
     px = 71,
     py = 95
@@ -132,23 +132,23 @@ local function count_blue_seals_safe()
 end
 
 local mysterious_joker = SMODS.Joker({
-    key = "mysterious",
+    key = "mm_mysterious",
     loc_txt = {
         name = "Mysterious Maiden",
         text = {
             "Gains {X:mult,C:white}X#1#{} Mult for every",
             "{C:blue}Blue Seal{} in your full deck",
-            "Currently: {X:mult,C:white}X#2#{}"
+            "{C:inactive}(Currently: {X:mult,C:white}X#2#{}{C:inactive}){}"
         }
     },
 
     rarity = 3,
     blueprint_compat = true,
     cost = 8,
-    atlas = "mysterious",
+    atlas = "mm_mysterious",
     pos = { x = 0, y = 0 },
 
-    config = { extra = { Xmult = 0.5 } },
+    config = { extra = { Xmult = 0.75 } },
 
     loc_vars = function(self, info_queue, card)
         local extra = (card and card.ability and card.ability.extra) or self.config.extra
@@ -175,14 +175,14 @@ local mysterious_joker = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "pero",
+    key = "mm_pero",
     path = "roccia.png",
     px = 71,
     py = 95
 })
 
 local PERO_joker = SMODS.Joker({
-    key = "pero",
+    key = "mm_pero",
     loc_txt = {
         name = "PERO",
         text = {
@@ -194,7 +194,7 @@ local PERO_joker = SMODS.Joker({
     rarity = 2,
     blueprint_compat = true,
     cost = 7,
-    atlas = "pero",
+    atlas = "mm_pero",
     pos = { x = 0, y = 0 },
 
     config = { extra = { Xmult = 2 } },
@@ -217,27 +217,27 @@ local PERO_joker = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "seafaring",
+    key = "mm_seafaring",
     path = "brant.png",
     px = 71,
     py = 95
 })
 
 local seafaring_joker = SMODS.Joker({
-    key = "seafaring",
+    key = "mm_seafaring",
     loc_txt = {
         name = "Seafaring",
         text = {
             "Gains {C:chips}+7 Chips{} permanently",
             "for each {C:blue}hand{} played",
-            "Currently: {C:chips}+#1#{} Chips{}"
+            "{C:inactive}(Currently: {C:chips}+#1#{} {C:inactive}Chips){}"
         }
     },
 
     rarity = 2,
     blueprint_compat = true,
     cost = 6,
-    atlas = "seafaring",
+    atlas = "mm_seafaring",
     pos = { x = 0, y = 0 },
 
     config = { extra = { chips = 7, total = 0 } },
@@ -261,7 +261,7 @@ local seafaring_joker = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "acolyte",
+    key = "mm_acolyte",
     path = "pheobe.png", 
     px = 71,
     py = 95
@@ -269,7 +269,7 @@ SMODS.Atlas({
 
 
 SMODS.Joker {
-    key = "acolyte",
+    key = "mm_acolyte",
     loc_txt = {
         name = "Devoted Acolyte",
         text = {
@@ -282,7 +282,7 @@ SMODS.Joker {
     blueprint_compat = false,
     cost = 10,
     pos = { x = 0, y = 0 },
-    atlas = "acolyte", 
+    atlas = "mm_acolyte", 
 
     config = {
         reduction = 0.25
@@ -322,20 +322,20 @@ SMODS.Joker {
 
 
 SMODS.Atlas({
-    key = "bard",
+    key = "mm_bard",
     path = "ciaccona.png", 
     px = 71,
     py = 95
 })
 
 local bard_joker = SMODS.Joker({
-    key = "bard",
+    key = "mm_bard",
     loc_txt = {
         name = "Common Bard",
         text = {
             "Gains {X:mult,C:white}X#1#{} for",
             "each {C:blue}Common Joker{}",
-            "Currently: {X:mult,C:white}X#2#{}",          
+            "{C:inactive}(Currently: {X:mult,C:white}X#2#{}{C:inactive}){}",          
         }
     },
 
@@ -343,7 +343,7 @@ local bard_joker = SMODS.Joker({
     blueprint_compat = true,
     cost = 8,
     pos = { x = 0, y = 0 },
-    atlas = "bard", 
+    atlas = "mm_bard", 
 
     config = { extra = { Xmult = 1 } },
 
@@ -379,14 +379,14 @@ local bard_joker = SMODS.Joker({
 SMODS.optional_features.retrigger_joker = true
 
 SMODS.Atlas({
-    key = "two_sided",
+    key = "mm_two_sided",
     path = "camellya.png",
     px = 71,
     py = 95
 })
 
-local two_sided = SMODS.Joker({
-    key = "two_sided",
+local Two_sided = SMODS.Joker({
+    key = "mm_two_sided",
     loc_txt = {
         name = "Two-Sided Face",
         text = {
@@ -402,7 +402,7 @@ local two_sided = SMODS.Joker({
     blueprint_compat = false,
     cost = 10,
     pos = { x = 0, y = 0 },
-    atlas = "two_sided",
+    atlas = "mm_two_sided",
 
     config = { extra = { chance = 6 } },
 
@@ -427,7 +427,7 @@ local two_sided = SMODS.Joker({
 
         if context.setting_blind and not context.blueprint then
             local chance = card.ability.extra.chance
-            if pseudorandom("two_sided") < (G.GAME.probabilities.normal / chance) then
+            if pseudorandom("mm_two_sided") < (G.GAME.probabilities.normal / chance) then
                 if #G.jokers.cards > 1 then
                     local card_to_destroy = pseudorandom_element(G.jokers.cards, "random_destroy")
                     if card_to_destroy and card_to_destroy ~= card then
@@ -444,14 +444,14 @@ local two_sided = SMODS.Joker({
 
 
 SMODS.Atlas({
-    key = "butterfly",
+    key = "mm_butterfly",
     path = "shorekeeper.png",
     px = 71,
     py = 95
 })
 
 local butterfly = SMODS.Joker({
-    key = "butterfly",
+    key = "mm_butterfly",
     loc_txt = {
         name = "Butterfly Memory",
         text = {
@@ -465,7 +465,7 @@ local butterfly = SMODS.Joker({
     blueprint_compat = true,
     cost = 10,
     pos = { x = 0, y = 0 },
-    atlas = "butterfly",
+    atlas = "mm_butterfly",
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = {
@@ -494,14 +494,14 @@ local butterfly = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "lively",
+    key = "mm_lively",
     path = "encore.png",
     px = 71,
     py = 95
 })
 
 local lively = SMODS.Joker({
-    key = "lively",
+    key = "mm_lively",
     loc_txt = {
         name = "Lively Child",
         text = {
@@ -514,7 +514,7 @@ local lively = SMODS.Joker({
     blueprint_compat = true,
     cost = 7,
     pos = { x = 0, y = 0 },
-    atlas = "lively",
+    atlas = "mm_lively",
 
     config = { extra = { repetitions = 1 } },
 
@@ -532,20 +532,20 @@ local lively = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "justice",
+    key = "mm_justice",
     path = "jiyan.png",
     px = 71,
     py = 95
 })
 
 local justice = SMODS.Joker({
-    key = "justice",
+    key = "mm_justice",
     loc_txt = {
         name = "Warrior Justice",
         text = {
             "Gains {X:mult,C:white}X#1#{} for every",
             "{C:attention}Boss Blind{} defeated",
-            "Currently: {X:mult,C:white}X#2#{}"
+            "{C:inactive}(Currently: {X:mult,C:white}X#2#{}{C:inactive}){}"
         }
     },
 
@@ -553,7 +553,7 @@ local justice = SMODS.Joker({
     blueprint_compat = true,
     cost = 8,
     pos = { x = 0, y = 0 },
-    atlas = "justice",
+    atlas = "mm_justice",
 
     config = { extra = { gain = 0.5, bosses_defeated = 0 } },
 
@@ -581,20 +581,20 @@ local justice = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "logical",
+    key = "mm_logical",
     path = "xiangli yao.png",
     px = 71,
     py = 95
 })
 
 local logical = SMODS.Joker({
-    key = "logical",
+    key = "mm_logical",
     loc_txt = {
         name = "Logical Calculation",
         text = {
             "{C:red}+5{} Mult if played hand contains",
             "a {C:attention}Flush{}",
-            "Currently: {C:red}+#3#{}"
+            "{C:inactive}(Currently: {C:red}+#3#{}{C:inactive}){}"
         }
     },
 
@@ -602,7 +602,7 @@ local logical = SMODS.Joker({
     blueprint_compat = true,
     cost = 7,
     pos = { x = 0, y = 0 },
-    atlas = "logical",
+    atlas = "mm_logical",
 
   config = { extra = { mult_gain = 5, mult = 0 } },
 
@@ -640,20 +640,20 @@ end
 })
 
 SMODS.Atlas({
-    key = "leader",
+    key = "mm_leader",
     path = "jinshi.png",
     px = 71,
     py = 95
 })
 
 local leader = SMODS.Joker({
-    key = "leader",
+    key = "mm_leader",
     loc_txt = {
         name = "Driven Leader",
         text = {
-            "Gains {C:red}+2{} Mult for every",
+            "Gains {C:red}+3{} Mult for every",
             "{C:attention}face{} card in your {C:attention}remaining deck{}", 
-            "Currently: {C:red}+#1#{}"
+            "{C:inactive}(Currently: {C:red}+#1#{}{C:inactive}){}"
         }
     },
 
@@ -661,9 +661,9 @@ local leader = SMODS.Joker({
     blueprint_compat = true,
     cost = 7,
     pos = { x = 0, y = 0 },
-    atlas = "leader",
+    atlas = "mm_leader",
 
-    config = { extra = { mult = 2 } },
+    config = { extra = { mult = 3 } },
 
     loc_vars = function(self, info_queue, card)
         local count = 0
@@ -698,14 +698,14 @@ local leader = SMODS.Joker({
 
 
 SMODS.Atlas({
-    key = "artist",
+    key = "mm_artist",
     path = "zhezhi.png",
     px = 71,
     py = 95
 })
 
 local artist = SMODS.Joker({
-    key = "artist",
+    key = "mm_artist",
     loc_txt = {
         name = "Expressive Artist",
         text = {
@@ -718,14 +718,14 @@ local artist = SMODS.Joker({
     blueprint_compat = true,
     cost = 7,
     pos = { x = 0, y = 0 },
-    atlas = "artist",
+    atlas = "mm_artist",
 
  calculate = function(self, card, context)
     if context.setting_blind then
 
         local cen_pool = {}
         for _, v in pairs(G.P_CENTER_POOLS["Enhanced"]) do
-            if v.key ~= "m_glass" and (v.key == "m_stone" or v.key == "m_bonus" or v.key == "m_wild" or v.key == "m_mult" or v.key == "m_steel") then
+            if v.key ~= "m_glass" and (v.key == "m_bonus" or v.key == "m_wild" or v.key == "m_mult" or v.key == "m_steel" or v.key == "m_gold" ) then
                 table.insert(cen_pool, v)
             end
         end
@@ -756,26 +756,26 @@ end
 })
 
 SMODS.Atlas({
-    key = "monk",
+    key = "mm_monk",
     path = "jianxin.png",
     px = 71,
     py = 95
 })
 
 local monk = SMODS.Joker {
-    key = "monk",
+    key = "mm_monk",
     blueprint_compat = true,
-    rarity = 3,
-    cost = 8,
+    rarity = 2,
+    cost = 7,
     pos = { x = 0, y = 0 },
-    atlas = "monk",
+    atlas = "mm_monk",
 
-    config = { extra = { xchips = 2 } },
+    config = { extra = { xchips = 3 } },
 
     loc_txt = {
         name = "Focused Monk",
         text = {
-            "{X:chips,C:white}X2{} Chips if played hand",
+            "{X:chips,C:white}X3{} Chips if played hand",
             "contains only {C:attention}#2#s{}",
             "{C:inactive}(Suit changes each round){}"
         }
@@ -829,14 +829,14 @@ SMODS.current_mod.reset_game_globals = function()
 end
 
 SMODS.Atlas({
-    key = "puppet",
+    key = "mm_puppet",
     path = "yinlin.png",
     px = 71,
     py = 95
 })
 
 local artist = SMODS.Joker({
-    key = "puppet",
+    key = "mm_puppet",
     loc_txt = {
         name = "Puppet Master",
         text = {
@@ -849,7 +849,7 @@ local artist = SMODS.Joker({
     blueprint_compat = true,
     cost = 7,
     pos = { x = 0, y = 0 },
-    atlas = "puppet",
+    atlas = "mm_puppet",
 
      config = { extra = { Xmult = 2, size = 5 } },
 
@@ -866,14 +866,14 @@ local artist = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "photosyntheic",
+    key = "mm_photosyntheic",
     path = "verina.png",
     px = 71,
     py = 95
 })
 
 local photosyntheic = SMODS.Joker({
-    key = "photosyntheic",
+    key = "mm_photosyntheic",
     loc_txt = {
         name = "Photosyntheic Rejuvenation",
         text = {
@@ -886,7 +886,7 @@ local photosyntheic = SMODS.Joker({
     blueprint_compat = true,
     cost = 7,
     pos = { x = 0, y = 0 },
-    atlas = "photosyntheic",
+    atlas = "mm_photosyntheic",
 
     config = { extra = { hands = 1, discards = 1 } },
 
@@ -915,20 +915,20 @@ local photosyntheic = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "sighted",
+    key = "mm_sighted",
     path = "changli.png",
     px = 71,
     py = 95
 })
 
 local sighted = SMODS.Joker({
-    key = "sighted",
+    key = "mm_sighted",
     loc_txt = {
         name = "True Sighted",
         text = {
             "Gains {X:mult,C:white}X0.1{} Mult if played",
             "hand contains a {C:attention}Pair{}",
-            "Currently: {X:mult,C:white}X#3#{}"
+            "{C:inactive}(Currently: {X:mult,C:white}X#3#{}{C:inactive}){}"
         }
     },
 
@@ -936,7 +936,7 @@ local sighted = SMODS.Joker({
     blueprint_compat = true,
     cost = 7,
     pos = { x = 0, y = 0 },
-    atlas = "sighted",
+    atlas = "mm_sighted",
 
     config = { extra = { Xmult_gain = 0.1, Xmult = 1 } },
 
@@ -979,14 +979,14 @@ local sighted = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "gladiator",
+    key = "mm_gladiator",
     path = "lupa.png",
     px = 71,
     py = 95
 })
 
 local gladiator = SMODS.Joker({
-    key = "gladiator",
+    key = "mm_gladiator",
     loc_txt = {
         name = "Ruthless Gladiator",
         text = {
@@ -999,7 +999,7 @@ local gladiator = SMODS.Joker({
     blueprint_compat = true,
     cost = 8,
     pos = { x = 0, y = 0 },
-    atlas = "gladiator",
+    atlas = "mm_gladiator",
 
     config = { extra = { xmult = 1.5 } },
 
@@ -1024,14 +1024,14 @@ local gladiator = SMODS.Joker({
 
 
 SMODS.Atlas({
-    key = "sun",
+    key = "mm_sun",
     path = "augusta.png",
     px = 71,
     py = 95
 })
 
 local sun = SMODS.Joker({
-    key = "sun",
+    key = "mm_sun",
     loc_txt = {
         name = "Solar Flares",
         text = {
@@ -1044,7 +1044,7 @@ local sun = SMODS.Joker({
     blueprint_compat = true,
     cost = 8,
     pos = { x = 0, y = 0 },
-    atlas = "sun",
+    atlas = "mm_sun",
 
     config = { extra = { Xmult = 3 } },
 
@@ -1065,14 +1065,14 @@ local sun = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "moon",
+    key = "mm_moon",
     path = "iuno.png",
     px = 71,
     py = 95
 })
 
 local sun = SMODS.Joker({
-    key = "moon",
+    key = "mm_moon",
     loc_txt = {
         name = "Moon Revolution",
         text = {
@@ -1085,7 +1085,7 @@ local sun = SMODS.Joker({
     blueprint_compat = true,
     cost = 7,
     pos = { x = 0, y = 0 },
-    atlas = "moon",
+    atlas = "mm_moon",
 
     config = { extra = { mult = 28 } },
 
@@ -1106,14 +1106,14 @@ local sun = SMODS.Joker({
 })
 
 SMODS.Atlas({
-    key = "knight",
+    key = "mm_knight",
     path = "cartethyia.png",
     px = 71,
     py = 95
 })
 
 local knight = SMODS.Joker({
-    key = "knight",
+    key = "mm_knight",
     loc_txt = {
         name = "Wandering Knight",
         text = {
@@ -1124,9 +1124,9 @@ local knight = SMODS.Joker({
 
     rarity = 3,
     blueprint_compat = true,
-    cost = 15,
+    cost = 12,
     pos = { x = 0, y = 0 },
-    atlas = "knight",
+    atlas = "mm_knight",
 
     config = { extra = { Xmult = 2 } },
 
@@ -1157,14 +1157,123 @@ end
 })
 
 SMODS.Atlas({
-    key = "chosen",
+    key = "sinflame",
+    path = "galbrena.png",
+    px = 71,
+    py = 95
+})
+
+local sinflame = SMODS.Joker({
+    key = "sinflame",
+    loc_txt = {
+        name = "Eternal Sinflame",
+        text = {
+            "If all Hands are used,",
+            "gain {X:mult,C:white}X0.25{} Mult.",
+            "{C:inactive}[Currently: {X:mult,C:white}X#1#{}]{}"
+        }
+    },
+
+    rarity = 3,
+    blueprint_compat = true,
+    cost = 8,
+    pos = { x = 0, y = 0 },
+    atlas = "sinflame",
+
+    config = {
+        extra = {
+            Xmult = 1.0,
+            Xmult_gain = 0.25
+        }
+    },
+
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.Xmult }
+        }
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            local round = G.GAME.current_round
+            if (round.hands_left == 0) then
+                card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_gain
+                return {
+                    message = "Hellfire!",
+                    colour = G.C.MULT,
+                    xmult = card.ability.extra.Xmult
+                }
+            else
+                return {
+                    xmult = card.ability.extra.Xmult
+                }
+            end
+        end
+    end,
+})
+
+
+SMODS.Atlas({
+    key = "mm_swordsman",
+    path = "qiuyuan.png",
+    px = 71,
+    py = 95
+})
+
+local swordsman = SMODS.Joker({
+    key = "mm_swordsman",
+    loc_txt = {
+        name = "Lone Wayfaring Swordsman",
+        text = {
+            "Gain {X:chips,C:white}X0.05{} Chips for each",
+            "scoring {C:attention}face{} card.",
+            "{C:inactive}(Currently: {X:chips,C:white}X#1#{}{C:inactive}){}"
+        }
+    },
+
+    rarity = 3,
+    blueprint_compat = true,
+    cost = 8,
+    pos = { x = 0, y = 0 },
+    atlas = "mm_swordsman",
+
+    config = { extra = { Xchips = 1.0, Xchips_gain = 0.05 } },
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.Xchips } }
+    end,
+
+    calculate = function(self, card, context)
+    
+        if context.joker_main then
+            local face_count = 0
+
+            for _, other in ipairs(context.scoring_hand or {}) do
+                if other and other:is_face() then
+                    face_count = face_count + 1
+                end
+            end
+
+            if face_count > 0 then
+                card.ability.extra.Xchips = card.ability.extra.Xchips + (face_count * card.ability.extra.Xchips_gain)
+                return {
+                    xchips = card.ability.extra.Xchips
+                }
+            end
+        end
+    end
+})
+
+
+SMODS.Atlas({
+    key = "mm_chosen",
     path = "rover.png",
     px = 71,
     py = 95
 })
 
 local knight = SMODS.Joker({
-    key = "chosen",
+    key = "mm_chosen",
     loc_txt = {
         name = "CHOSEN ONE",
         text = {
@@ -1177,7 +1286,7 @@ local knight = SMODS.Joker({
     blueprint_compat = true,
     cost = 20,
     pos = { x = 0, y = 0 },
-    atlas = "chosen",
+    atlas = "mm_chosen",
 
     
     config = { extra = { Xmult = 2 } },
@@ -1220,7 +1329,7 @@ SMODS.Blind({
     dollars = 5,
     mult = 2,
     boss = {
-        min = 3,
+        min = 1,
         max = 0,
     },
     boss_colour = HEX('8B0000'), 
@@ -1243,50 +1352,58 @@ SMODS.Atlas({
     frames = 1
 })
 
+local MELODY_ODDS = 4
+
 SMODS.Blind({
     key = "melody",
     loc_txt = {
         name = "The Melody",
         text = {
-            "-1 hand size for every",
-            "2 Jokers you own",
+            "Each card you play has a #1# in #2# chance",
+            "to become debuffed."
         },
     },
     atlas = "melody",
     pos = { x = 0, y = 0 },
     dollars = 5,
     mult = 2,
-    boss = {
-        min = 4,
-        max = 0,
-    },
-    boss_colour = HEX('3C1361'),
+    boss = { min = 2, max = 0 },
+    boss_colour = HEX("3C1361"),
+    config = { extra = { odds = MELODY_ODDS } },
+    vars = { '' .. (G.GAME and G.GAME.probabilities.normal or 1), MELODY_ODDS },
 
-    set_blind = function(self, context)
-        if not self.disabled then
-            local jokers = #G.jokers.cards
-            local penalty = math.floor(jokers / 2)
-            if penalty > 0 then
-                G.hand:change_size(-penalty)
-                self._hand_penalty = penalty 
+    loc_vars = function(self)
+        return { vars = { '' .. (G.GAME and G.GAME.probabilities.normal or 1), self.config.extra.odds } }
+    end,
+
+    press_play = function(self)
+        if G.hand and G.hand.highlighted then
+            for _, card in ipairs(G.hand.highlighted) do
+                if pseudorandom(pseudoseed("melody")) < G.GAME.probabilities.normal / self.config.extra.odds then
+                    card:set_debuff(true)
+                    if G.GAME and G.GAME.blind then
+                        G.GAME.blind:wiggle()
+                        G.GAME.blind.triggered = true
+                    end
+                end
             end
         end
     end,
 
-    disable = function(self)
-        if self._hand_penalty and self._hand_penalty > 0 then
-            G.hand:change_size(self._hand_penalty)
-            self._hand_penalty = nil
+    drawn_to_hand = function(self, cards)
+        if not cards or type(cards) ~= "table" then return end
+        for _, card in ipairs(cards) do
+            if pseudorandom(pseudoseed("melody")) < G.GAME.probabilities.normal / self.config.extra.odds then
+                card:set_debuff(true)
+                if G.GAME and G.GAME.blind then
+                    G.GAME.blind:wiggle()
+                    G.GAME.blind.triggered = true
+                end
+            end
         end
     end,
-
-    defeat = function(self)
-        if self._hand_penalty and self._hand_penalty > 0 then
-            G.hand:change_size(self._hand_penalty)
-            self._hand_penalty = nil
-        end
-    end
 })
+
 
 
 SMODS.Atlas({
@@ -1311,9 +1428,9 @@ SMODS.Blind({
     atlas = "play",
     pos = { x = 0, y = 0 },
     dollars = 5,
-    mult = 2,
+    mult = 1.5,
     boss = {
-        min = 5,
+        min = 4,
         max = 0,
     },
     boss_colour = HEX('b38f00'),
@@ -1351,7 +1468,299 @@ SMODS.Blind({
     end
 })
 
--- Mod icon
+
+SMODS.Atlas({
+    key = "corruption",
+    path = "cristoforo.png",
+    px = 34,
+    py = 34,
+    atlas_table = 'ANIMATION_ATLAS',
+    frames = 1
+})
+
+local corruption = SMODS.Blind({
+    key = "corruption",
+    loc_txt = {
+        name = "The Corruption",
+        text = {
+            "All non-enhanced",
+            "cards are debuffed"
+        },
+    },
+    atlas = "corruption",
+    pos = { x = 0, y = 0 },
+    dollars = 8,
+    mult = 2,
+    boss = { showdown = true },
+    boss_colour = HEX('000000'),
+})
+
+corruption.recalc_debuff = function(self, card, from_blind)
+    if card.area ~= G.jokers then
+        if not card.ability or not card.ability.effect or card.ability.effect == 'Base' then
+            return true
+        end
+    end
+    return false
+end
+
+
+-- Challenges
+
+SMODS.Challenge {
+    key = 'Insanity',
+    loc_txt = {
+        name = "Insanity",
+    },
+
+    jokers = {
+        { id = 'j_mm_two_sided', eternal = true },
+    },
+
+    rules = {
+        custom = {
+            { id = 'none' }
+        },
+        modifiers = {
+            { id = "joker_slots", value = 2 },
+            { id = "hands", value = 1 },
+            { id = "discards", value = 5 },
+        },
+        deck = {
+            type = "Challenge Deck"
+        },
+    },
+        restrictions = {
+           banned_tags = {
+            { id = 'tag_uncommon' },
+            { id = 'tag_rare' },
+            { id = 'tag_negative' },
+           },
+
+},
+    button_colour = G.C.RED,
+}
+
+
+SMODS.Challenge {
+    key = 'c_mm_POF',
+    loc_txt = {
+        name = "Poem of Finale",
+    },
+
+    jokers = {
+        { id = 'j_mm_bard', eternal = true },
+        { id = 'j_riff_raff', eternal = true }
+    },
+
+    rules = {
+        custom = {
+            {id = 'no_extra_hand_money'},
+            {id = 'no_interest'},
+            { id = 'no_shop_jokers' }
+        },
+        modifiers = {
+            { id = "joker_slots", value = 4 },
+            { id = "hands", value = 4 },
+            { id = "discards", value = 3 },
+        },
+        deck = {
+            type = "Challenge Deck"
+        },
+    },
+
+    restrictions = {
+        banned_cards = {
+            { id = 'c_soul' },
+            { id = 'c_wraith' },
+            { id = 'c_judgement' },
+            {id = 'v_seed_money'},
+            {id = 'v_money_tree'},
+            { id = 'p_buffoon_normal_1', ids = {
+                'p_buffoon_normal_1','p_buffoon_normal_2','p_buffoon_jumbo_1','p_buffoon_mega_1',
+            }},
+        },
+
+        banned_tags = {
+            { id = 'tag_uncommon' },
+            { id = 'tag_rare' },
+            { id = 'tag_holo' },
+            { id = 'tag_polychrome' },
+            { id = 'tag_negative' },
+            { id = 'tag_foil' },
+            { id = 'tag_buffoon' },
+        },
+    },
+
+    button_colour = G.C.RED,
+}
+
+SMODS.Challenge {
+    key = 'SP',
+    loc_txt = {
+        name = "Sophisticated Spending",
+    },
+
+    jokers = {
+        { id = 'j_mm_crystalization', eternal = true },
+    },
+
+    rules = {
+        custom = {
+            {id = 'no_reward'},
+            {id = 'no_extra_hand_money'},
+            {id = 'no_interest'},
+            {id = 'discard_cost', value = 1}
+        },
+        modifiers = {
+            { id = "joker_slots", value = 3 },
+            { id = "hands", value = 4 },
+            { id = "discards", value = 3 },
+            { id = "dollars", value = 120 },
+        },
+        deck = {
+            type = "Challenge Deck"
+        },
+    },
+
+    restrictions = {
+        banned_cards = { 
+            { id = 'c_immolate' },
+            { id = 'c_hermit' },
+            { id = 'c_temperance' },
+            { id = 'c_devil' },  
+            {id = 'v_seed_money'},
+            {id = 'v_money_tree'},                  
+            {id = 'j_golden'},
+            {id = 'j_business'},
+            {id = 'j_egg'},
+            {id = 'j_riff_raff'},
+            {id = 'j_ticket'},
+            {id = 'j_faceless'}, 
+            {id = 'j_todo_list'},                             
+            {id = 'j_satellite'},
+            {id = 'j_rocket'},
+            {id = 'j_reserved_parking'},
+            {id = 'j_to_the_moon'},
+            {id = 'j_mail'},
+            {id = 'j_gift'},
+            {id = 'j_rough_gem'},
+            {id = 'j_matador'},
+            {id = 'j_midas_mask'},
+            {id = 'j_rocket'},
+        },
+        vouchers = {
+         },
+        banned_tags = {  
+            { id = 'tag_uncommon' },
+            { id = 'tag_rare' },
+            { id = 'tag_negative' },
+            { id = 'tag_foil' },
+            { id = 'tag_holo' },
+            { id = 'tag_polychrome' },
+            { id = 'tag_buffoon' },
+            { id = 'tag_top_up' },
+            { id = 'tag_investment' },
+            { id = 'tag_garbage'},
+            { id = 'tag_skip' },
+            { id = 'tag_economy' },
+            { id = 'tag_handy' },
+        },
+        banned_other = {
+        },
+    },
+    button_colour = G.C.RED,
+}
+
+SMODS.Challenge {
+    key = 'BC',
+    loc_txt = {
+        name = "Blank Canvas",
+    },
+
+    jokers = {
+        { id = 'j_mm_artist', eternal = true },
+        { id = 'j_popcorn' },
+    },
+ 
+    rules = {
+        custom = {
+            { id = 'mm_BC' }
+        },
+        modifiers = {
+            { id = "joker_slots", value = 5 },
+            { id = "hands", value = 1 },
+            { id = "discards", value = 0 },
+        },
+    },
+        deck = {
+            type = "Challenge Deck",
+            no_suits = { 
+                S = true,
+                H = true,
+                C = true,
+                D = true
+            },
+        },
+
+
+    button_colour = G.C.RED,
+}
+
+local function starts_with(str, start)
+    return string.sub(str, 1, #start) == start
+end
+
+SMODS.Challenge({
+    key = 'TTF',
+    loc_txt = {
+        name = "To The Finale",
+    },
+
+    rules = {
+        custom = {
+            { id = "mm_TTF" },
+            { id = "mm_TTF2" },
+            { id = "mm_TTF3" }
+        },
+        modifiers = {
+            { id = "joker_slots", value = 5 },
+            { id = "hands", value = 4 },
+            { id = "discards", value = 3 },
+        },
+    },
+
+    deck = {
+        type = "Challenge Deck",
+    },
+
+    restrictions = {
+        banned_cards = function()
+            local banned = {}
+        
+            for k, v in pairs(G.P_CENTERS) do
+                if starts_with(k, "j_") and not starts_with(k, "j_mm_") then
+                    banned[#banned + 1] = k
+                end
+            end
+
+            for k, v in pairs(G.P_BLINDS) do
+                if not starts_with(k, "bl_mm_") then
+                    banned[#banned + 1] = k
+                end
+            end
+
+            return {{
+                id = 'j_mm_placeholder',
+                ids = banned
+            }}
+        end,
+    },
+
+    button_colour = G.C.RED,
+})
+
+-- Mod icon and misc
 
 SMODS.Atlas({
     key = "modicon",
@@ -1360,4 +1769,42 @@ SMODS.Atlas({
     py = 34
 })
 
+SMODS.Atlas({
+    key = "mm_placeholder",
+    path = "banned.png",
+    px = 71,
+    py = 95
+})
 
+local placeholder = SMODS.Joker({
+    key = "mm_placeholder",
+    loc_txt = {
+        name = "BANNED",
+        text = {
+            "Non-Wuthering Waves jokers and blinds",
+            "are banned"
+        },
+    },
+    config = {},
+    rarity = 1,
+    cost = 1,
+    no_mod_badges = true,
+    no_collection = true,
+    no_doe = true,
+    discovered = true,
+    unlocked = true,
+    blueprint_compat = false,
+    eternal_compat = false,
+    perishable_compat = false,
+    atlas = "mm_placeholder",
+    width = 71,
+    height = 95,
+
+    set_card_type_badge = function(self, card, badges)
+        badges = nil
+    end,
+
+    in_pool = function(self, args)
+        return false
+    end
+})
