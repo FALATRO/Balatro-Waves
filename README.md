@@ -11,9 +11,9 @@ This is a mod that focuses on adding references to Wuthering Waves into Balatro 
 
 <img width="1920" height="1080" alt="Screenshot (4)" src="https://github.com/user-attachments/assets/87d0dd5b-5e0c-4583-a2d8-d5228202d807" />
 
-<img width="1920" height="1080" alt="Screenshot (7)" src="https://github.com/user-attachments/assets/65804fe5-5e4c-4a32-a882-3441811e1a3d" />
+<img width="1920" height="1080" alt="Screenshot (16)" src="https://github.com/user-attachments/assets/7a41a4e8-5ca7-4603-9c34-028c9f3cab57" />
 
-<img width="1920" height="1080" alt="Screenshot (10)" src="https://github.com/user-attachments/assets/bbc1fb83-f9cb-495c-ad8e-b1ccb35f3eb2" />
+<img width="1920" height="1080" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/cd16c0f4-83e4-4ab5-92ac-6ce872804893" />
 
 ## How to Download:
 1. Install the latest version of Steamodded
