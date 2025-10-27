@@ -1,4 +1,28 @@
 return {
+     misc = {
+            challenge_names = {
+                c_mm_Insanity = "Insanity",
+                c_mm_POF = "Poem of Finale",
+                c_mm_SP = "Sophisticated Spending",
+                c_mm_BC = "Blank Canvas",
+                c_mm_TTF = "To The Finale",
+            },
+
+            v_text = {
+                ch_c_mm_TTF = {
+                    "Only {C:attention}Wuthering Waves{} Jokers can be bought",
+                },
+                ch_c_mm_TTF2 = {
+                    "(With the exception of Jimbo)",
+                },
+                ch_c_mm_TTF3 = {
+                    "Face only {C:attention}Wuthering Waves{} Blinds",
+                },
+                ch_c_mm_BC = {
+                    "Start with absolutely no cards in your deck",
+                },
+            },
+    },
     descriptions = {
         Joker = {
             j_worker = {
@@ -179,31 +203,40 @@ return {
 },
 },
 },
-},
 
-Blind == {
-		bl_goat = {
-				name = "The Goat",
-				text = {
-			"Cards with ranks 2-7",
-            "are debuffed",
-				},
-			},
+    Blind = {
+        bl_mm_goat = {
+            name = "The Goat",
+            text = {
+                "Cards with ranks 2-7",
+                "are debuffed",
+            },
+        },
 
         bl_melody = {
-				name = "The Melody",
-				text = {
-			"-1 hand size for every",
-            "2 Jokers you own",
-				},
-			},
+            name = "The Melody",
+            text = {
+                "Each card you play has a #1# in #2# chance",
+                "to become debuffed.",
+            },
+        },
 
-        bl_play = {
-				name = "The Play",
-				text = {
-			"One of your highest rarity",
-            "Jokers is debuffed"
-				},
-			},
-        }
-    
+        bl_mm_play = {
+            name = "The Play",
+            text = {
+                "One of your highest rarity",
+                "Jokers is debuffed",
+            },
+        },
+
+        bl_corruption = {
+            name = "The Corruption",
+            text = {
+                "All non-enhanced cards",
+                "are debuffed",
+            },
+        },
+    },
+
+   
+}
