@@ -3,7 +3,7 @@
   "name": "Wuthering Waves Mod",
   "display_name": "Wuthering Waves Mod",
   "author": ["Falatro"],
-  "description": "A Wuthering Waves mod that adds many resonators and three new boss blinds",
+  "description": "A Wuthering Waves mod that adds 25 Resonators (Jokers), 4 new Boss Blinds, and 5 new Challenges",
   "prefix": "mm",
   "main_file": "init.lua",
   "priority": 0,
@@ -16,4 +16,5 @@
         "Lovely (>=0.8.0)"
       ]
 }
+
 
