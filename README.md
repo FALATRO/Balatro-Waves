@@ -20,3 +20,10 @@ This is a mod that focuses on adding references to Wuthering Waves into Balatro 
 2. Install the latest version of Lovely
 3. Unzip download folder and put it in your mods folder
 4. Enjoy!
+
+## Credits
+Creator: FALATRO
+
+Art: My sister
+
+Based on the video game ***Wuthering Waves*** created by ***Kuro Games***
