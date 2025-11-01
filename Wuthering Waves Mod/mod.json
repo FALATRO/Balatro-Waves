@@ -13,6 +13,7 @@
   "dependencies": 
   [
     "Steamodded (>=1.0.0~BETA-0711a)",
-        "Lovely (>=0.6)"
+        "Lovely (>=0.8.0)"
       ]
 }
+
