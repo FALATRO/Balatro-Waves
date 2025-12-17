@@ -238,5 +238,32 @@ return {
         },
     },
 
-   
-}
+
+
+Back = {
+		b_mm_resonator = {
+			name = "Resonator Deck",
+				text = {
+			"Start with one random",
+            "{C:attention}Balatro Waves{} Joker",
+				},
+			},
+        },
+
+Voucher = {
+			v_mm_minor = {
+				name = "Minor Pity",
+				text = {
+			"{C:green}Uncommon Jokers{} appear {C:attention}2x{}",
+            "more often"
+				},
+			},
+            v_mm_major = {
+				name = "Major Pity",
+				text = {
+			"{C:red}Rare Jokers{} appear {C:attention}4x{}",
+            "more often"
+				},
+			},
+        },
+    }
