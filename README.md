@@ -13,7 +13,7 @@ This is a mod that focuses on adding references to Wuthering Waves into Balatro 
 
 <img width="1920" height="1080" alt="Screenshot (4)" src="https://github.com/user-attachments/assets/87d0dd5b-5e0c-4583-a2d8-d5228202d807" />
 
-<img width="1920" height="1080" alt="Screenshot (16)" src="https://github.com/user-attachments/assets/7a41a4e8-5ca7-4603-9c34-028c9f3cab57" />
+<img width="1920" height="1080" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/7c03d877-26ed-47a0-966a-48a67ca0b95b" />
 
 <img width="1920" height="1080" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/cd16c0f4-83e4-4ab5-92ac-6ce872804893" />
 
