@@ -1263,6 +1263,67 @@ local swordsman = SMODS.Joker({
     end
 })
 
+SMODS.Atlas({
+    key = "mm_cutter",
+    path = "chisa.png",
+    px = 71,
+    py = 95
+})
+
+local cutter = SMODS.Joker({
+    key = "mm_cutter",
+    loc_txt = {
+        name = "Threadcutter",
+        text = {
+            "Gains {C:red}+2{} Mult if {C:attention}five{}",
+            "cards are discarded at the same time",
+            "{C:inactive}(Currently: {C:red}+#2#{}{C:inactive}){}"
+        }
+    },
+
+    rarity = 2,
+    blueprint_compat = true,
+    cost = 7,
+    pos = { x = 0, y = 0 },
+    atlas = "mm_cutter",
+
+    config = { extra = { mult_gain = 0.4, mult = 0 } },
+
+    loc_vars = function(self, info_queue, card)
+        
+        return { vars = { card.ability.extra.mult_gain, card.ability.extra.mult } }
+    end,
+
+    calculate = function(self, card, context)
+     
+        if context and context.discard then
+            local count = 0
+            if context.discard_count and type(context.discard_count) == "number" then
+                count = context.discard_count
+            elseif context.discarded and type(context.discarded) == "table" then
+                count = #context.discarded
+            elseif context.full_hand and type(context.full_hand) == "table" then
+                count = #context.full_hand
+            end
+
+            if count >= 5 then
+                card.ability.extra.mult = (card.ability.extra.mult or 0) + (card.ability.extra.mult_gain or 0)
+                return {
+                    message = "Upgrade!",
+                    colour = G.C.MULT,
+                    delay = 0.4
+                }
+            end
+        end
+
+        if context and context.joker_main then
+            return {
+                mult = card.ability.extra.mult or 0
+            }
+        end
+    end,
+})
+
 
 SMODS.Atlas({
     key = "mm_chosen",
@@ -1757,6 +1818,148 @@ SMODS.Challenge({
     },
 
     button_colour = G.C.RED,
+})
+
+
+-- Decks
+SMODS.Atlas{
+    key = "resonator",
+    path = "resonatordeck.png",
+    px = 71,
+    py = 95,
+}
+
+SMODS.Back({
+    key = "resonator",
+    loc_txt = {
+        name = "Resonator Deck",
+        text = {
+            "Start with one random",
+            "{C:attention}Balatro Waves{} Joker",
+            "{C:inactive}(Excluding CHOSEN ONE){}"
+        },
+    },
+    pos = { x = 0, y = 0 },
+    atlas = "resonator",
+    unlocked = true,
+
+apply = function()
+    G.E_MANAGER:add_event(Event({
+        func = function()
+            if G.consumeables then
+                local pool = {}
+                for k, v in pairs(G.P_CENTERS or {}) do
+                    if type(k) == "string"
+                       and k:sub(1,5) == "j_mm_"
+                       and k ~= "j_mm_chosen"
+                       and k ~= "j_mm_placeholder" then
+                        table.insert(pool, k)
+                    end
+                end
+                local chosen_key
+                if #pool > 0 then
+                    if type(pseudorandom_element) == "function" then
+                        chosen_key = pseudorandom_element(pool, pseudoseed("resonator"))
+                    else
+                        chosen_key = pool[math.random(#pool)]
+                    end
+                else
+                    chosen_key = "j_mm_worker" 
+                end
+
+                SMODS.add_card({ key = chosen_key })
+            end
+            return true
+        end
+    }))
+end,
+})
+
+-- Vouchers
+
+SMODS.Atlas({
+    key = "minor",
+    path = "minorpity.png",
+    px = 71,
+    py = 95,
+})
+
+SMODS.Voucher({
+    key = "minor",
+    loc_txt = {
+        name = "Minor Pity",
+        text = {
+            "{C:green}Uncommon Jokers{} appear {C:attention}2x{}",
+            "more often"
+        },
+    },
+
+    pos = { x = 0, y = 0 },
+    atlas = "minor",
+    set = "Voucher",
+    config = { extra = { rate = 2 } },
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.rate } }
+    end,
+
+    redeem = function(self, card)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                local rate = (card and card.ability and card.ability.extra and card.ability.extra.rate) or 1
+                G.GAME.uncommon_rate = rate
+                G.GAME.uncommon_mod = rate
+                G.GAME["uncommon_mod"] = rate
+                if not G.GAME.modifiers then G.GAME.modifiers = {} end
+                G.GAME.modifiers.uncommon = rate
+                G.GAME._minor_pity_rate = rate
+                return true
+            end
+        }))
+    end,
+})
+
+SMODS.Atlas({
+    key = "major",
+    path = "majorpity.png",
+    px = 71,
+    py = 95,
+})
+
+SMODS.Voucher({
+    key = "major",
+    loc_txt = {
+        name = "Major Pity",
+        text = {
+            "{C:red}Rare Jokers{} appear {C:attention}2x{}",
+            "more often"
+        },
+    },
+
+    pos = { x = 0, y = 0 },
+    requires = { 'v_mm_minor' },
+    atlas = "major",
+    set = "Voucher",
+    config = { extra = { rate = 2 } },
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.rate } }
+    end,
+
+    redeem = function(self, card)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                local rate = (card and card.ability and card.ability.extra and card.ability.extra.rate) or 1
+                G.GAME.rare_rate = rate
+                G.GAME.rare_mod = rate
+                G.GAME["rare_mod"] = rate
+                if not G.GAME.modifiers then G.GAME.modifiers = {} end
+                G.GAME.modifiers.rare = rate
+                G.GAME._major_pity_rate = rate
+                return true
+            end
+        }))
+    end,
 })
 
 -- Mod icon and misc
