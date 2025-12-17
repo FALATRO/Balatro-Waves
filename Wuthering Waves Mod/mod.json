@@ -1,20 +1,18 @@
 {
-  "id": "Wuthering Waves Mod",
-  "name": "Wuthering Waves Mod",
-  "display_name": "Wuthering Waves Mod",
+  "id": "Balatro Waves",
+  "name": "Balatro Waves",
+  "display_name": "Balatro Waves",
   "author": ["Falatro"],
-  "description": "A Wuthering Waves mod that adds 25 Resonators (Jokers), 4 new Boss Blinds, and 5 new Challenges",
+  "description": "A Wuthering Waves mod that adds 26 Resonators (Jokers), 4 new Boss Blinds, 1 new Deck, 2 new Vouchers, and 5 new Challenges",
   "prefix": "mm",
   "main_file": "init.lua",
   "priority": 0,
   "badge_colour": "2596be",
   "badge_text_colour": "ffffff",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "dependencies": 
   [
     "Steamodded (>=1.0.0~BETA-0711a)",
         "Lovely (>=0.8.0)"
       ]
 }
-
-
