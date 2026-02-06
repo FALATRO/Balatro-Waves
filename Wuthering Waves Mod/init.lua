@@ -14,6 +14,7 @@ local joker_2 = SMODS.Joker({
         text = {
             "Every scoring 9 or 5 gives",
             "{C:chips}+24 Chips{} and {C:mult}+7 Mult{}",
+            "every 10 times a 9 or 5 is trigger gain {C:attetnion}$10{}"
         }
     },
     rarity = 2,
@@ -1000,7 +1001,7 @@ local gladiator = SMODS.Joker({
     pos = { x = 0, y = 0 },
     atlas = "mm_gladiator",
 
-    config = { extra = { xmult = 1.5 } },
+    config = { extra = { xmult = 2 } },
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.xmult } }
@@ -1323,6 +1324,95 @@ local cutter = SMODS.Joker({
         end
     end,
 })
+
+SMODS.Atlas({
+    key = "mm_colors",
+    path = "lynae.png",
+    px = 71,
+    py = 95
+})
+
+local colors = SMODS.Joker({
+    key = "mm_colors",
+    loc_txt = {
+        name = "New Colors",
+        text = {
+            "Other {C:attention}Edition{} Jokers",
+            "give {X:mult,C:white}X1.5{} Mult"
+        }
+    },
+
+    rarity = 3,
+    blueprint_compat = true,
+    cost = 9,
+    pos = { x = 0, y = 0 },
+    atlas = "mm_colors",
+
+    calculate = function(self, card, context)
+        if context.other_joker
+            and context.other_joker ~= card
+            and context.other_joker.edition then
+
+            return {
+                xmult = 1.5
+            }
+        end
+    end
+})
+
+SMODS.Atlas({
+    key = "mm_professor",
+    path = "mornye.png",
+    px = 71,
+    py = 95
+})
+
+local old_level_up_hand = level_up_hand
+local professor_lock = false
+
+function level_up_hand(hand, amount, instant)
+    old_level_up_hand(hand, amount, instant)
+
+    local professors = SMODS.find_card('j_mm_professor')
+    if not professors or #professors == 0 then return end
+    if professor_lock then return end
+
+    professor_lock = true
+    for _ = 1, #professors do
+        old_level_up_hand(hand, amount, nil)
+    end
+    professor_lock = false
+end
+
+SMODS.Joker({
+    key = "mm_professor",
+
+    loc_txt = {
+        name = "Star of the Professor",
+        text = {
+            "All consumed {C:planet}Planet{} cards",
+            "upgrade their poker hand {C:attention}twice{}"
+        }
+    },
+
+    rarity = 3,
+    blueprint_compat = false,
+    cost = 10,
+    pos = { x = 0, y = 0 },
+    atlas = "mm_professor",
+
+    calculate = function(self, card, context)
+        if context.retrigger_joker_check
+            and context.other_card
+            and context.other_card.ability
+            and context.other_card.ability.set == 'Planet'
+            and not card.debuff
+        then
+            return true
+        end
+    end
+})
+
 
 
 SMODS.Atlas({
@@ -1874,6 +1964,443 @@ apply = function()
     }))
 end,
 })
+
+-- Enhancements
+
+SMODS.Atlas({
+    key = "mm_aero",
+    path = "aero.png",
+    px = 71,
+    py = 95,
+})
+
+SMODS.Enhancement({
+    key = "mm_aero",
+    atlas = "mm_aero",
+    pos = { x = 0, y = 0 },
+
+    config = {
+        extra = {
+            chance = 2,
+            dollars = 5
+        }
+    },
+
+    loc_txt = {
+        name = "Aero",
+        text = {
+            "{C:green}#1# in #2#{} chance to gain {C:money}$5{}",
+            "when discarded"
+        },
+    },
+
+    loc_vars = function(self, info_queue, card)
+        local numerator = G.GAME and G.GAME.probabilities
+            and G.GAME.probabilities.normal or 1
+        local denominator = card.ability.extra.chance
+        return { vars = { numerator, denominator } }
+    end,
+
+    calculate = function(self, card, context)
+        if context.discard and context.other_card == card then
+            local numerator = G.GAME.probabilities.normal or 1
+            if pseudorandom("aero") < numerator / card.ability.extra.chance then
+                return {
+                    dollars = card.ability.extra.dollars,
+                }
+            end
+        end
+    end
+})
+
+SMODS.Atlas({
+    key = "mm_fusion",
+    path = "fusion.png",
+    px = 71,
+    py = 95,
+})
+
+SMODS.Enhancement{
+    key = "mm_fusion",
+    pos = { x = 0, y = 0 },
+    atlas = "mm_fusion",
+
+    config = {
+        extra = {
+            mult_good = 3,
+            mult_bad = 1/3,
+            good_odds = 2, 
+            bad_odds = 4   
+        }
+    },
+
+    loc_txt = {
+        name = "Fusion",
+        text = {
+            "{C:green}#1# in #2#{} chance for {X:mult,C:white}X3{} Mult",
+            "{C:green}#3# in #4#{} chance for {X:mult,C:white}/3{} Mult"
+        },
+    },
+
+    loc_vars = function(self, info_queue, card)
+        local good_num, good_den = SMODS.get_probability_vars(
+            card, 1, card.ability.extra.good_odds, "fusion_good"
+        )
+        local bad_num, bad_den = SMODS.get_probability_vars(
+            card, 1, card.ability.extra.bad_odds, "fusion_bad"
+        )
+
+        return {
+            vars = {
+                good_num, good_den,
+                bad_num, bad_den
+            }
+        }
+    end,
+
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            local ret = {}
+
+            if SMODS.pseudorandom_probability(
+                card, "fusion_good", 1, card.ability.extra.good_odds
+            ) then
+                ret.xmult = card.ability.extra.mult_good
+            end
+
+            if SMODS.pseudorandom_probability(
+                card, "fusion_bad", 1, card.ability.extra.bad_odds
+            ) then
+                ret.xmult = card.ability.extra.mult_bad
+            end
+
+            return next(ret) and ret or nil
+        end
+    end
+}
+
+SMODS.Atlas({
+    key = "mm_spectro",
+    path = "spectro.png",
+    px = 71,
+    py = 95,
+})
+
+SMODS.Enhancement({
+    key = "mm_spectro",
+    pos = { x = 0, y = 0 },
+    atlas = "mm_spectro",
+    config = {
+        extra = {
+            mult = 0,
+            gain = 0.5
+        }
+    },
+
+    loc_txt = {
+        name = "Spectro",
+        text = {
+            "Gains {C:red}+0.5{} Mult every time",
+            "this card is triggered",
+            "{C:inactive}(Currently: {C:red}+#1#{}{C:inactive}){}"
+        },
+    },
+
+    loc_vars = function(self, info_queue, card)
+        return {
+            vars = { card.ability.extra.mult }
+        }
+    end,
+
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            card.ability.extra.mult =
+                card.ability.extra.mult + card.ability.extra.gain
+
+            return {
+                mult = card.ability.extra.mult,
+            }
+        end
+    end
+})
+
+SMODS.Atlas({
+    key = "mm_electro",
+    path = "electro.png",
+    px = 71,
+    py = 95,
+})
+
+
+SMODS.Enhancement({
+    key = "mm_electro",
+    pos = { x = 0, y = 0 },
+    atlas = "mm_electro",
+    loc_txt = {
+        name = "Electro",
+        text = {
+            "{X:chips,C:white}X2{} Chips if played",
+            "on the {C:attention}last hand{}"
+        },
+    },
+
+    calculate = function(self, card, context)
+        if context.main_scoring
+        and context.cardarea == G.play
+        and G.GAME.current_round
+        and G.GAME.current_round.hands_left == 0 then
+
+            return {
+                x_chips = 2
+            }
+        end
+    end
+})
+
+
+SMODS.Atlas({
+    key = "mm_glacio",
+    path = "glacio.png",
+    px = 71,
+    py = 95,
+})
+
+
+SMODS.Enhancement({
+    key = "mm_glacio",
+    pos = { x = 0, y = 0 },
+    atlas = "mm_glacio",
+    loc_txt = {
+        name = "Glacio",
+        text = {
+            "This card cannot be",
+            "{C:attention}debuffed{}"
+        },
+    },
+
+    calculate = function(self, card, context)
+        SMODS.debuff_card(card, 'prevent_debuff', 'glacio_enhancement')
+    end,
+})
+
+SMODS.Atlas({
+    key = "mm_havoc",
+    path = "havoc.png",
+    px = 71,
+    py = 95,
+})
+
+SMODS.Enhancement({
+    key = "mm_havoc",
+    pos = { x = 0, y = 0 },
+    atlas = "mm_havoc",
+    loc_txt = {
+        name = "Havoc",
+        text = {
+            "{X:mult,C:white}X1.5{} Mult but discard one",
+            "random card from hand"
+        },
+    },
+
+    calculate = function(self, card, context)
+        if context.main_scoring then
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    if #G.hand.cards > 0 then
+                        local selected_card, card_index = pseudorandom_element(G.hand.cards, 'vremade_havoc')
+                        G.hand:add_to_highlighted(selected_card, true)
+                        play_sound('card1', 1)
+                        G.FUNCS.discard_cards_from_highlighted(nil, true)
+                    end
+                    return true
+                end
+            }))
+
+            return {
+                x_mult = 1.5
+            }
+        end
+    end
+})
+
+-- Tarot Cards
+SMODS.Atlas({
+    key = "bamboo",
+    path = "bg.png",
+    px = 71,
+    py = 95,
+})
+
+
+SMODS.Consumable({
+    key = "bamboo",
+    set = "Tarot",
+    loc_txt = {
+        name = "Bamboo Grove",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:green}Aero{}"
+        },
+    },
+
+    pos = { x = 0, y = 0 },
+    atlas = "bamboo",
+
+config = { max_highlighted = 1, mod_conv = 'm_mm_aero' },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        return { vars = { card.ability.max_highlighted, localize { type = 'aero', set = 'Enhanced', key = m_mm_aero } } }
+    end,
+})
+
+SMODS.Atlas({
+    key = "glory",
+    path = "rog.png",
+    px = 71,
+    py = 95,
+})
+
+
+SMODS.Consumable({
+    key = "glory",
+    set = "Tarot",
+    loc_txt = {
+        name = "Ruin of Glory",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:red}Fusion{}"
+        },
+    },
+
+    pos = { x = 0, y = 0 },
+    atlas = "glory",
+
+config = { max_highlighted = 1, mod_conv = 'm_mm_fusion' },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        return { vars = { card.ability.max_highlighted, localize { type = 'fusion', set = 'Enhanced', key = m_mm_fusion } } }
+    end,
+})
+
+SMODS.Atlas({
+    key = "inverted",
+    path = "it.png",
+    px = 71,
+    py = 95,
+})
+
+
+SMODS.Consumable({
+    key = "inverted",
+    set = "Tarot",
+    loc_txt = {
+        name = "Inverted Tower",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:attention}Spectro{}"
+        },
+    },
+
+    pos = { x = 0, y = 0 },
+    atlas = "inverted",
+
+config = { max_highlighted = 1, mod_conv = 'm_mm_spectro' },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        return { vars = { card.ability.max_highlighted, localize { type = 'spectro', set = 'Enhanced', key = m_mm_spectro } } }
+    end,
+})
+
+SMODS.Atlas({
+    key = "origin",
+    path = "oc.png",
+    px = 71,
+    py = 95,
+})
+
+
+SMODS.Consumable({
+    key = "origin",
+    set = "Tarot",
+    loc_txt = {
+        name = "Origin Chamber",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:purple}Electro{}"
+        },
+    },
+
+    pos = { x = 0, y = 0 },
+    atlas = "origin",
+
+config = { max_highlighted = 1, mod_conv = 'm_mm_electro' },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        return { vars = { card.ability.max_highlighted, localize { type = 'electro', set = 'Enhanced', key = m_mm_electro } } }
+    end,
+})
+
+
+
+SMODS.Atlas({
+    key = "snowfall",
+    path = "sr.png",
+    px = 71,
+    py = 95,
+})
+
+
+SMODS.Consumable({
+    key = "snowfall",
+    set = "Tarot",
+    loc_txt = {
+        name = "Snowfall Realm",
+        text = {
+            "Enhances {C:attention}2{} selected card",
+            "with {C:blue}Glacio{}"
+        },
+    },
+
+    pos = { x = 0, y = 0 },
+    atlas = "snowfall",
+
+config = { max_highlighted = 2, mod_conv = 'm_mm_glacio' },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        return { vars = { card.ability.max_highlighted, localize { type = 'glacio', set = 'Enhanced', key = m_mm_glacio } } }
+    end,
+})
+
+
+SMODS.Atlas({
+    key = "crownless",
+    path = "soc.png",
+    px = 71,
+    py = 95,
+})
+
+
+SMODS.Consumable({
+    key = "crownless",
+    set = "Tarot",
+    loc_txt = {
+        name = "Statue of Crownless",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:pink}Havoc{}"
+        },
+    },
+
+    pos = { x = 0, y = 0 },
+    atlas = "crownless",
+
+config = { max_highlighted = 1, mod_conv = 'm_mm_havoc' },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        return { vars = { card.ability.max_highlighted, localize { type = 'havoc', set = 'Enhanced', key = m_mm_havoc } } }
+    end,
+})
+
 
 -- Vouchers
 
