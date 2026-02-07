@@ -14,7 +14,6 @@ local joker_2 = SMODS.Joker({
         text = {
             "Every scoring 9 or 5 gives",
             "{C:chips}+24 Chips{} and {C:mult}+7 Mult{}",
-            "every 10 times a 9 or 5 is trigger gain {C:attetnion}$10{}"
         }
     },
     rarity = 2,
@@ -2537,3 +2536,4 @@ local placeholder = SMODS.Joker({
         return false
     end
 })
+
