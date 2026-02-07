@@ -1370,7 +1370,12 @@ local old_level_up_hand = level_up_hand
 local professor_lock = false
 
 function level_up_hand(hand, amount, instant)
+
     old_level_up_hand(hand, amount, instant)
+
+    if type(amount) ~= "string" then
+        return
+    end
 
     local professors = SMODS.find_card('j_mm_professor')
     if not professors or #professors == 0 then return end
@@ -1378,10 +1383,11 @@ function level_up_hand(hand, amount, instant)
 
     professor_lock = true
     for _ = 1, #professors do
-        old_level_up_hand(hand, amount, nil)
+        old_level_up_hand(hand, amount, instant)
     end
     professor_lock = false
 end
+
 
 SMODS.Joker({
     key = "mm_professor",
@@ -1400,18 +1406,17 @@ SMODS.Joker({
     pos = { x = 0, y = 0 },
     atlas = "mm_professor",
 
-    calculate = function(self, card, context)
-        if context.retrigger_joker_check
-            and context.other_card
-            and context.other_card.ability
-            and context.other_card.ability.set == 'Planet'
-            and not card.debuff
-        then
-            return true
-        end
+    calculate = function(self, card, context) 
+    if context.joker_main 
+       and context.other_card           
+       and context.other_card.ability    
+       and context.other_card.ability.set == 'Planet'
+       and not card.debuff
+    then
+        return true
     end
+end
 })
-
 
 
 SMODS.Atlas({
@@ -2201,27 +2206,31 @@ SMODS.Enhancement({
         },
     },
 
-    calculate = function(self, card, context)
-        if context.main_scoring then
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    if #G.hand.cards > 0 then
-                        local selected_card, card_index = pseudorandom_element(G.hand.cards, 'vremade_havoc')
-                        G.hand:add_to_highlighted(selected_card, true)
-                        play_sound('card1', 1)
-                        G.FUNCS.discard_cards_from_highlighted(nil, true)
-                    end
-                    return true
+calculate = function(self, card, context)
+    if context.main_scoring
+    and context.cardarea == G.play then
+
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                if #G.hand.cards > 0 then
+                    local selected_card = pseudorandom_element(
+                        G.hand.cards,
+                        'mm_havoc_discard'
+                    )
+                    G.hand:add_to_highlighted(selected_card, true)
+                    play_sound('card1', 1)
+                    G.FUNCS.discard_cards_from_highlighted(nil, true)
                 end
-            }))
+                return true
+            end
+        }))
 
-            return {
-                x_mult = 1.5
-            }
-        end
+        return {
+            x_mult = 1.5
+        }
     end
+end
 })
-
 -- Tarot Cards
 SMODS.Atlas({
     key = "bamboo",
