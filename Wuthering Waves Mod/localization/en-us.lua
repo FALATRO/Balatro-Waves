@@ -189,6 +189,25 @@ return {
         "Played {C:attention}Aces{} give {X:mult,C:white}X2{} Mult",
         "but you lose half your hands"
             },
+            j_cutter = {
+        name = "Threadcutter",
+        text = {
+            "Gains {C:red}+2{} Mult if {C:attention}five{}",
+            "cards are discarded at the same time",
+            "{C:inactive}(Currently: {C:red}+#2#{}{C:inactive}){}"
+        },
+         j_colors = {
+        name = "New Colors",
+        text = {
+            "Other {C:attention}Edition{} Jokers",
+            "give {X:mult,C:white}X1.5{} Mult"
+        },
+        j_professor = {
+        name = "Star of the Professor",
+        text = {
+            "All consumed {C:planet}Planet{} cards",
+            "upgrade their poker hand {C:attention}twice{}"
+        },
             j_chosen = {
             name = "CHOSEN ONE",
             text = {
@@ -250,6 +269,105 @@ Back = {
 			},
         },
 
+    Enhanced = {
+        m_mm_aero = {
+        name = "Aero",
+        text = {
+            "{C:green}#1# in #2#{} chance to gain {C:money}$5{}",
+            "when discarded"
+        },
+    },
+
+        m_mm_fusion = {
+        name = "Fusion",
+        text = {
+            "{C:green}#1# in #2#{} chance for {X:mult,C:white}X3{} Mult",
+            "{C:green}#3# in #4#{} chance for {X:mult,C:white}/3{} Mult"
+        },
+    },
+
+     m_mm_spectro = {
+        name = "Spectro",
+        text = {
+            "Gains {C:red}+0.5{} Mult every time",
+            "this card is triggered",
+            "{C:inactive}(Currently: {C:red}+#1#{}{C:inactive}){}"
+        },
+    },  
+
+     m_mm_electro = {
+        name = "Electro",
+        text = {
+            "{X:chips,C:white}X2{} Chips if played",
+            "on the {C:attention}last hand{}"
+        },
+    },
+
+  m_mm_glacio = {
+        name = "Glacio",
+        text = {
+            "This card cannot be",
+            "{C:attention}debuffed{}"
+        },
+    },
+
+      m_mm_havoc = {
+        name = "Havoc",
+        text = {
+            "{X:mult,C:white}X1.5{} Mult but discard one",
+            "random card from hand"
+        },
+    },
+},
+
+	Tarot = {
+        c_mm_bamboo = {
+            name = "Bamboo Grove",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:green}Aero{}"
+        },
+    },
+        c_mm_glory = {
+             name = "Ruin of Glory",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:red}Fusion{}"
+        },
+    },
+        c_mm_inverted = {
+        name = "Inverted Tower",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:attention}Spectro{}"
+        },
+    },
+        c_mm_origin = {
+        name = "Origin Chamber",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:purple}Electro{}"
+        },
+    },
+       c_mm_snowfall = {
+       name = "Snowfall Realm",
+        text = {
+            "Enhances {C:attention}2{} selected card",
+            "with {C:blue}Glacio{}"
+        },
+    },
+
+       c_mm_crownless = {
+        name = "Statue of Crownless",
+        text = {
+            "Enhances {C:attention}1{} selected card",
+            "with {C:pink}Havoc{}"
+        },
+    },
+},
+
+
+
 Voucher = {
 			v_mm_minor = {
 				name = "Minor Pity",
@@ -266,4 +384,7 @@ Voucher = {
 				},
 			},
         },
-    }
+    },
+},
+},
+}
