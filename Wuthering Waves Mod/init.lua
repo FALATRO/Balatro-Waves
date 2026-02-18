@@ -1650,14 +1650,20 @@ local corruption = SMODS.Blind({
 })
 
 corruption.recalc_debuff = function(self, card, from_blind)
-    if card.area ~= G.jokers then
-        if not card.ability or not card.ability.effect or card.ability.effect == 'Base' then
-            return true
-        end
+
+    if card.area == G.jokers then
+        return false
     end
+
+    if not card.config
+        or not card.config.center
+        or card.config.center == G.P_CENTERS.c_base
+    then
+        return true
+    end
+
     return false
 end
-
 
 -- Challenges
 
