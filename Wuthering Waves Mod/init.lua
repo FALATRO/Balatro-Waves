@@ -2200,42 +2200,74 @@ SMODS.Atlas({
     py = 95,
 })
 
+local havoc_discard_queue = 0
+
 SMODS.Enhancement({
     key = "mm_havoc",
     pos = { x = 0, y = 0 },
     atlas = "mm_havoc",
+
     loc_txt = {
         name = "Havoc",
         text = {
-            "{X:mult,C:white}X1.5{} Mult but discard one",
+            "{X:mult,C:white}X1.5{} Mult but destroy one",
             "random card from hand"
         },
     },
 
-calculate = function(self, card, context)
-    if context.main_scoring
-    and context.cardarea == G.play then
+    calculate = function(self, card, context)
 
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                if #G.hand.cards > 0 then
-                    local selected_card = pseudorandom_element(
-                        G.hand.cards,
-                        'mm_havoc_discard'
-                    )
-                    G.hand:add_to_highlighted(selected_card, true)
-                    play_sound('card1', 1)
-                    G.FUNCS.discard_cards_from_highlighted(nil, true)
-                end
-                return true
+        if context.end_of_round then
+            card.ability.havoc_pending = false
+            havoc_discard_queue = 0
+        end
+
+        if context.main_scoring
+        and context.cardarea == G.play
+        and not context.blueprint
+        and not context.retrigger_joker
+        then
+            if not card.ability.havoc_pending then
+                card.ability.havoc_pending = true
+                havoc_discard_queue = havoc_discard_queue + 1
             end
-        }))
 
-        return {
-            x_mult = 1.5
-        }
+            return {
+                x_mult = 1.5
+            }
+        end
+
+        if context.after
+        and havoc_discard_queue > 0
+        then
+            local discard_count = havoc_discard_queue
+            havoc_discard_queue = 0
+
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.05,
+                func = function()
+
+                    for i = 1, discard_count do
+                        if not G.hand or #G.hand.cards <= 1 then break end
+
+                        local selected_card = pseudorandom_element(
+                            G.hand.cards,
+                            'mm_havoc_discard'
+                        )
+
+                        if selected_card then
+                            
+                            G.hand:remove_card(selected_card)
+                            selected_card:start_dissolve()
+                        end
+                    end
+
+                    return true
+                end
+            }))
+        end
     end
-end
 })
 -- Tarot Cards
 SMODS.Atlas({
