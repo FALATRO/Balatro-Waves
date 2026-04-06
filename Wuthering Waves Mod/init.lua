@@ -2218,7 +2218,7 @@ SMODS.Enhancement({
     calculate = function(self, card, context)
 
         if context.end_of_round then
-            card.ability.havoc_pending = false
+            card.ability.havoc_pending = true
             havoc_discard_queue = 0
         end
 
@@ -2232,40 +2232,19 @@ SMODS.Enhancement({
                 havoc_discard_queue = havoc_discard_queue + 1
             end
 
+            local selected_card = pseudorandom_element(
+                G.hand.cards,
+                'mm_havoc_discard'
+            )
+
+            if selected_card then
+                G.hand:remove_card(selected_card)
+                selected_card:start_dissolve()
+            end
+
             return {
                 x_mult = 1.5
             }
-        end
-
-        if context.after
-        and havoc_discard_queue > 0
-        then
-            local discard_count = havoc_discard_queue
-            havoc_discard_queue = 0
-
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.05,
-                func = function()
-
-                    for i = 1, discard_count do
-                        if not G.hand or #G.hand.cards <= 1 then break end
-
-                        local selected_card = pseudorandom_element(
-                            G.hand.cards,
-                            'mm_havoc_discard'
-                        )
-
-                        if selected_card then
-                            
-                            G.hand:remove_card(selected_card)
-                            selected_card:start_dissolve()
-                        end
-                    end
-
-                    return true
-                end
-            }))
         end
     end
 })
