@@ -5,19 +5,23 @@ This is a mod that focuses on adding references to Wuthering Waves into Balatro 
 
 ## This mod as of now adds the following:
 
-- 28 new Wuthering Waves themed Jokers
+- 34 new Wuthering Waves themed Jokers
 - 4 Wuthering Waves themed Boss Blinds
-- 5 new Challenges
+- 6 new Challenges
 - 1 new Deck
 - 2 new Vouchers
 - 6 new Enhanced Cards
 - 6 new Tarot Cards
+- A new consumeable type
+- 4 new Booster Packs
+- 5 new Editions
 
-<img width="1920" height="1080" alt="Screenshot (4)" src="https://github.com/user-attachments/assets/87d0dd5b-5e0c-4583-a2d8-d5228202d807" />
+<img width="1920" height="1080" alt="Screenshot (61)" src="https://github.com/user-attachments/assets/e04c5abc-656c-494e-821e-03e85aacb1ca" />
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/99d13f1c-25a6-4a5d-b925-8fb57778c9aa" />
+<img width="1920" height="1080" alt="Screenshot (63)" src="https://github.com/user-attachments/assets/8a5da2da-fa61-4804-ae42-dee540b1601f" />
 
-<img width="1920" height="1080" alt="Screenshot (18)" src="https://github.com/user-attachments/assets/cd16c0f4-83e4-4ab5-92ac-6ce872804893" />
+<img width="1920" height="1080" alt="Screenshot (60)" src="https://github.com/user-attachments/assets/ceecb79e-5203-43b6-ae58-de1bb09e2f4d" />
+
 
 ## How to Download:
 1. Install the latest version of Steamodded
