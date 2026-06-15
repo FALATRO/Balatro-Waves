@@ -1,0 +1,18 @@
+{
+  "id": "Balatro Waves",
+  "name": "Balatro Waves",
+  "display_name": "Balatro Waves",
+  "author": ["FALATRO"],
+  "description": "A Wuthering Waves mod that adds many new Resonators (Jokers), new Boss Blinds, new Deck, new Vouchers, new Challenges, and more!",
+  "prefix": "mm",
+  "main_file": "init.lua",
+  "priority": 0,
+  "badge_colour": "2596be",
+  "badge_text_colour": "ffffff",
+  "version": "1.2.0",
+  "dependencies": 
+  [
+    "Steamodded (>=1.0.0~BETA-0711a)",
+        "Lovely (>=0.8.0)"
+      ]
+}
