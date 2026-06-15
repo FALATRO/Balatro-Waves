@@ -32,6 +32,6 @@ This is a mod that focuses on adding references to Wuthering Waves into Balatro 
 ## Credits
 Creator: FALATRO
 
-Art: My sister
+Art: My sister (KaitlynTheStampede)
 
 Based on the video game ***Wuthering Waves*** created by ***Kuro Games***
