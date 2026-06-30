@@ -66,7 +66,6 @@ SMODS.Challenge {
             }},
             {id = 'p_mm_jinzhou_pack'},
             {id = 'p_mm_rinascita_pack'},
-            {id = 'p_mm_septimont_pack'},
             {id = 'p_mm_blackshores_pack'},
             {id = 'p_mm_lahairoi_pack'},
         },
